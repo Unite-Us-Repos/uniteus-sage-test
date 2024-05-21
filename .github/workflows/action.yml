@@ -21,12 +21,6 @@ jobs:
     - name: Debug - List root directory
       run: ls -la
 
-    - name: Debug - List wp-content directory
-      run: ls -la wp-content
-
-    - name: Debug - List themes directory
-      run: ls -la wp-content/themes
-
     - name: Setup Node
       uses: actions/setup-node@v3
       with:
@@ -34,16 +28,14 @@ jobs:
 
     - name: Install js/css dependencies
       run: |
-        cd wp-content/themes/${{ env.THEME_NAME }}
         npm install
 
     - name: Build js/css
       run: |
-        cd wp-content/themes/${{ env.THEME_NAME }}
         npm run build:production
 
     - name: Clean up node modules (not needed to deploy)
-      run: rm -rf wp-content/themes/${{ env.THEME_NAME }}/node_modules
+      run: rm -rf node_modules
 
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
@@ -52,7 +44,6 @@ jobs:
 
     - name: Install Composer
       run: |
-        cd wp-content/themes/${{ env.THEME_NAME }}
         composer install --no-dev --optimize-autoloader
 
     - name: Deploy to WP Engine
