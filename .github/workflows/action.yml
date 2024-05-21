@@ -18,8 +18,14 @@ jobs:
     - name: Check out the git repo
       uses: actions/checkout@v2
 
-    - name: Debug - List directories
-      run: ls -R
+    - name: Debug - List root directory
+      run: ls -la
+
+    - name: Debug - List wp-content directory
+      run: ls -la wp-content
+
+    - name: Debug - List themes directory
+      run: ls -la wp-content/themes
 
     - name: Setup Node
       uses: actions/setup-node@v3
