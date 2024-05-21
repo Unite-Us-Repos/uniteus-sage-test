@@ -18,6 +18,9 @@ jobs:
     - name: Check out the git repo
       uses: actions/checkout@v2
 
+    - name: Debug - List directories
+      run: ls -R
+
     - name: Setup Node
       uses: actions/setup-node@v3
       with:
@@ -39,7 +42,7 @@ jobs:
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '8.2'
+        php-version: '8.0'
 
     - name: Install Composer
       run: |
