@@ -43,11 +43,16 @@ jobs:
 
   php-build:
     runs-on: ubuntu-latest
-    container: gjrdiesel/composer-80:alpine
     steps:
-
     - name: Check out the git repo
       uses: actions/checkout@v2
+
+    - name: Setup PHP, with Composer
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.3'
+        extensions: mbstring, xml # Add any other PHP extensions you need
+        tools: composer:v2 # Specify Composer version if needed
 
     - name: Run composer install in theme directory
       run: cd wp-content/themes/${{ env.THEME_NAME }} && composer install && cd -
