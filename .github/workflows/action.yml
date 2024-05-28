@@ -36,10 +36,10 @@ jobs:
       WPE_INSTALL_NAME: ${{ needs.set-env-vars.outputs.WPE_INSTALL_NAME }}
     steps:
       - name: Check out the git repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20.13.1
 
@@ -71,7 +71,7 @@ jobs:
       WPE_INSTALL_NAME: ${{ needs.set-env-vars.outputs.WPE_INSTALL_NAME }}
     steps:
       - name: Check out the git repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup PHP, with Composer
         uses: shivammathur/setup-php@v2
