@@ -2,6 +2,9 @@ name: Deploy to WP Engine
 env:
   WPE_SSHG_KEY_PRIVATE: ${{ secrets.WPENGINE_SFTP_PASSWORD }}
   THEME_NAME: uniteus-sage
+  DEVELOP_WPE_INSTALL_NAME: uniteustestdev
+  STAGING_WPE_INSTALL_NAME: uniteusteststg
+  MASTER_WPE_INSTALL_NAME: uniteustest
 
 on:
   push:
@@ -15,21 +18,20 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       WPE_INSTALL_NAME: ${{ steps.set-env.outputs.WPE_INSTALL_NAME }}
-    strategy:
-      matrix:
-        branch: [develop, staging, master]
-        include:
-          - branch: develop
-            WPE_INSTALL_NAME: [uniteustestdev]
-          - branch: staging
-            WPE_INSTALL_NAME: [uniteusteststg]
-          - branch: master
-            WPE_INSTALL_NAME: [uniteustest]
     steps:
       - name: Set WPE_INSTALL_NAME based on branch
         id: set-env
-        run: echo "WPE_INSTALL_NAME=${{ matrix.WPE_INSTALL_NAME }}" >> $GITHUB_ENV
-
+        run: |
+          if [ "${{ github.ref }}" == "refs/heads/develop" ]; then
+            echo "WPE_INSTALL_NAME=${{ env.DEVELOP_WPE_INSTALL_NAME }}" >> $GITHUB_ENV
+            echo "::set-output name=WPE_INSTALL_NAME::${{ env.DEVELOP_WPE_INSTALL_NAME }}"
+          elif [ "${{ github.ref }}" == "refs/heads/staging" ]; then
+            echo "WPE_INSTALL_NAME=${{ env.STAGING_WPE_INSTALL_NAME }}" >> $GITHUB_ENV
+            echo "::set-output name=WPE_INSTALL_NAME::${{ env.STAGING_WPE_INSTALL_NAME }}"
+          elif [ "${{ github.ref }}" == "refs/heads/master" ]; then
+            echo "WPE_INSTALL_NAME=${{ env.MASTER_WPE_INSTALL_NAME }}" >> $GITHUB_ENV
+            echo "::set-output name=WPE_INSTALL_NAME::${{ env.MASTER_WPE_INSTALL_NAME }}"
+          fi
   js-build:
     needs: set-env-vars
     runs-on: ubuntu-latest
