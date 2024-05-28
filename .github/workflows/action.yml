@@ -20,11 +20,11 @@ jobs:
         branch: [develop, staging, master]
         include:
           - branch: develop
-            WPE_INSTALL_NAME: uniteustestdev
+            WPE_INSTALL_NAME: [uniteustestdev]
           - branch: staging
-            WPE_INSTALL_NAME: uniteusteststg
+            WPE_INSTALL_NAME: [uniteusteststg]
           - branch: master
-            WPE_INSTALL_NAME: uniteustest
+            WPE_INSTALL_NAME: [uniteustest]
     steps:
       - name: Set WPE_INSTALL_NAME based on branch
         id: set-env
