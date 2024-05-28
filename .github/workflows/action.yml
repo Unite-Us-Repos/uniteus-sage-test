@@ -2,9 +2,6 @@ name: Deploy to WP Engine
 env:
   WPE_SSHG_KEY_PRIVATE: ${{ secrets.WPENGINE_SFTP_PASSWORD }}
   THEME_NAME: uniteus-sage
-  DEVELOP_WPE_INSTALL_NAME: uniteustestdev
-  STAGING_WPE_INSTALL_NAME: uniteusteststg
-  MASTER_WPE_INSTALL_NAME: uniteustest
 
 on:
   push:
@@ -23,11 +20,11 @@ jobs:
         branch: [develop, staging, master]
         include:
           - branch: develop
-            WPE_INSTALL_NAME: ${{ env.DEVELOP_WPE_INSTALL_NAME }}
+            WPE_INSTALL_NAME: uniteustestdev
           - branch: staging
-            WPE_INSTALL_NAME: ${{ env.STAGING_WPE_INSTALL_NAME }}
+            WPE_INSTALL_NAME: uniteusteststg
           - branch: master
-            WPE_INSTALL_NAME: ${{ env.MASTER_WPE_INSTALL_NAME }}
+            WPE_INSTALL_NAME: uniteustest
     steps:
       - name: Set WPE_INSTALL_NAME based on branch
         id: set-env
