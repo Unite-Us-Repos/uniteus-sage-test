@@ -23,14 +23,11 @@ jobs:
         id: set-env
         run: |
           if [ "${{ github.ref }}" == "refs/heads/develop" ]; then
-            echo "WPE_INSTALL_NAME=${{ env.DEVELOP_WPE_INSTALL_NAME }}" >> $GITHUB_ENV
-            echo "::set-output name=WPE_INSTALL_NAME::${{ env.DEVELOP_WPE_INSTALL_NAME }}"
+            echo "WPE_INSTALL_NAME=${{ env.DEVELOP_WPE_INSTALL_NAME }}" >> $GITHUB_OUTPUT
           elif [ "${{ github.ref }}" == "refs/heads/staging" ]; then
-            echo "WPE_INSTALL_NAME=${{ env.STAGING_WPE_INSTALL_NAME }}" >> $GITHUB_ENV
-            echo "::set-output name=WPE_INSTALL_NAME::${{ env.STAGING_WPE_INSTALL_NAME }}"
+            echo "WPE_INSTALL_NAME=${{ env.STAGING_WPE_INSTALL_NAME }}" >> $GITHUB_OUTPUT
           elif [ "${{ github.ref }}" == "refs/heads/master" ]; then
-            echo "WPE_INSTALL_NAME=${{ env.MASTER_WPE_INSTALL_NAME }}" >> $GITHUB_ENV
-            echo "::set-output name=WPE_INSTALL_NAME::${{ env.MASTER_WPE_INSTALL_NAME }}"
+            echo "WPE_INSTALL_NAME=${{ env.MASTER_WPE_INSTALL_NAME }}" >> $GITHUB_OUTPUT
           fi
   js-build:
     needs: set-env-vars
