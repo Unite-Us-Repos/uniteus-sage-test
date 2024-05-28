@@ -50,7 +50,7 @@ jobs:
           cmd: install
 
       - name: Build js/css
-        uses: borales/actions-yarn@v4
+        uses: borales/actions-yarn@v5
         with:
           dir: wp-content/themes/${{ env.THEME_NAME }}
           cmd: build
