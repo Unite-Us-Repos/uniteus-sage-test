@@ -1,6 +1,6 @@
 
 
-<footer class="footer-section component-section bg-blue-900 testing-class-for-build-sab-dev" aria-labelledby="footer-heading">
+<footer class="footer-section component-section bg-blue-900 this-is-a-test-class__sab" aria-labelledby="footer-heading">
   <h2 id="footer-heading" class="sr-only">Footer</h2>
   <div class="component-inner-section">
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 lg:gap-8">
